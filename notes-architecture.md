@@ -46,3 +46,53 @@ Ce qui provoque :
     - Le résultat est un tableau de **any**.
     - Présence de **subscribe** sans **unsubscribe** d'un **Observable**.
     - Log console de l'erreur.
+
+# Nouvelle architecture
+
+## Arborescence
+
+/src/app/
+    ├── pages/
+        ├── home.component.ts
+        ├── home.component.scss
+        ├── home.component.html
+        ├── home.component.spec.ts
+        ├── country.component.ts
+        ├── country.component.scss
+        ├── country.component.html
+        ├── country.component.spec.ts
+        ├── not-found.component.ts
+        ├── not-found.component.scss
+        ├── not-found.component.html
+        ├── not-found.component.spec.ts
+    ├── components/
+        ├── header.component.ts
+        ├── header.component.scss
+        ├── header.component.html
+        ├── header.component.spec.ts
+        ├── global-chart.component.ts
+        ├── global-chart.component.scss
+        ├── global-chart.component.html
+        ├── global-chart.component.spec.ts
+        ├── country-chart.component.ts
+        ├── country-chart.component.scss
+        ├── country-chart.component.html
+        ├── country-chart.component.spec.ts
+        ├── chart-colors.ts
+    ├── services/
+        ├── data.service.ts
+    ├── models/
+        ├── country.ts
+
+## Explications
+
+- Les **component** des différentes pages seront regroupés dans */src/app/pages*.
+- Les  **component** briques servant à la constructiond des pages seront regroupés dans */src/app/components*.
+- Les **model** seront regroupés dans */src/app/models*.
+- Les **service** seront regroupés dans */src/app/services*.
+
+- Des **component** Angular classic sont utilisés pour les pages et différents blocs qui les composent.
+- Un **service** DataService sera implémenté via une classe en Singleton pour récupérer et rendre les données accessibles via un unique appel HTTP.
+- Un **model** Country sera implémenté pour gérer les données des différents pays via des objets.
+
+- Dans */src/app/components* un fichier *chart-colors.ts* est ajouté pour dissocier les couleurs des charts de la partie logique du code.
