@@ -51,38 +51,38 @@ Ce qui provoque :
 
 ## Arborescence
 
-/src/app/
-    ├── pages/
-        ├── home.component.ts
-        ├── home.component.scss
-        ├── home.component.html
-        ├── home.component.spec.ts
-        ├── country.component.ts
-        ├── country.component.scss
-        ├── country.component.html
-        ├── country.component.spec.ts
-        ├── not-found.component.ts
-        ├── not-found.component.scss
-        ├── not-found.component.html
-        ├── not-found.component.spec.ts
-    ├── components/
-        ├── header.component.ts
-        ├── header.component.scss
-        ├── header.component.html
-        ├── header.component.spec.ts
-        ├── global-chart.component.ts
-        ├── global-chart.component.scss
-        ├── global-chart.component.html
-        ├── global-chart.component.spec.ts
-        ├── country-chart.component.ts
-        ├── country-chart.component.scss
-        ├── country-chart.component.html
-        ├── country-chart.component.spec.ts
-        ├── chart-colors.ts
-    ├── services/
-        ├── data.service.ts
-    ├── models/
-        ├── country.ts
+- /src/app/
+    - pages/
+        - home.component.ts
+        - home.component.scss
+        - home.component.html
+        - home.component.spec.ts
+        - country.component.ts
+        - country.component.scss
+        - country.component.html
+        - country.component.spec.ts
+        - not-found.component.ts
+        - not-found.component.scss
+        - not-found.component.html
+        - not-found.component.spec.ts
+    - components/
+        - header.component.ts
+        - header.component.scss
+        - header.component.html
+        - header.component.spec.ts
+        - global-chart.component.ts
+        - global-chart.component.scss
+        - global-chart.component.html
+        - global-chart.component.spec.ts
+        - country-chart.component.ts
+        - country-chart.component.scss
+        - country-chart.component.html
+        - country-chart.component.spec.ts
+        - chart-colors.ts
+    - services/
+        - data.service.ts
+    - models/
+        - country.ts
 
 ## Explications
 
