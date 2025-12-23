@@ -7,7 +7,7 @@ import { HttpClient,HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CountryService {
-  private url = './assets/mock/olympi.json';
+  private url = './assets/mock/olympic.json';
   private countries$! : Observable<Country[]>;
 
   constructor(private http: HttpClient) { }
