@@ -17,7 +17,7 @@ export class CountryService {
     {
       this.countries$ = this.http.get<Country[]>(this.url).pipe(
         shareReplay(1),
-        catchError((r:HttpErrorResponse) => throwError(() => new Error(`Erreur dans la récupération des données (${r.message})`)))
+        catchError((r:HttpErrorResponse) => throwError(() => new Error(`Erreur on getting datas (${r.message})`)))
       );
     }
     return this.countries$;
