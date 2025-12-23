@@ -4,6 +4,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import { DataService } from '../services/data.service';
 import Chart from 'chart.js/auto';
 import { Country } from '../models/country';
+import { Participation } from '../models/participation';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class CountryComponent implements OnInit {
   private olympicUrl = './assets/mock/olympic.json';
   public lineChart!: Chart<"line", string[], number>;
   public titlePage?: string = '';
-  public totalEntries: any = 0;
+  public totalEntries: number = 0;
   public totalMedals: number = 0;
   public totalAthletes: number = 0;
   public error!: string;
@@ -30,15 +31,14 @@ export class CountryComponent implements OnInit {
       (data) => {
         if (data && data.length > 0) {
           const selectedCountry = data.find((i: Country) => i.country === countryName);
-          console.log(selectedCountry)
           this.titlePage = selectedCountry?.country;
-          const participations = selectedCountry?.participations.map((i: any) => i);
+          const participations = selectedCountry?.participations.map((i: Participation) => i);
           this.totalEntries = participations?.length ?? 0;
-          const years = selectedCountry?.participations.map((i: any) => i.year) ?? [];
-          const medals = selectedCountry?.participations.map((i: any) => i.medalsCount.toString()) ?? [];
-          this.totalMedals = medals.reduce((accumulator: any, item: any) => accumulator + parseInt(item), 0);
-          const nbAthletes = selectedCountry?.participations.map((i: any) => i.athleteCount.toString()) ?? []
-          this.totalAthletes = nbAthletes.reduce((accumulator: any, item: any) => accumulator + parseInt(item), 0);
+          const years = selectedCountry?.participations.map((i: Participation) => i.year) ?? [];
+          const medals = selectedCountry?.participations.map((i: Participation) => i.medalsCount.toString()) ?? [];
+          this.totalMedals = medals.reduce((accumulator: number, item: string) => accumulator + parseInt(item), 0);
+          const nbAthletes = selectedCountry?.participations.map((i: Participation) => i.athleteCount.toString()) ?? []
+          this.totalAthletes = nbAthletes.reduce((accumulator: number, item: string) => accumulator + parseInt(item), 0);
           this.buildChart(years, medals);
         }
       },
