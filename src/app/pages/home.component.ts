@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
     this.CountryService.getCountries().subscribe(
       (data) => {
         if (data && data.length > 0) {
-          this.totalJOs = Array.from(new Set(data.map((i: any) => i.participations.map((f: any) => f.year)).flat())).length;
-          this.countriesNameList = data.map((i: any) => i.country);
+          this.totalJOs = Array.from(new Set(data.map((i: Country) => i.participations.map((f: Participation) => f.year)).flat())).length;
+          this.countriesNameList = data.map((i: Country) => i.country);
           this.totalCountries = this.countriesNameList.length;
           const medals = data.map((i: Country) => i.participations.map((i: Participation) => (i.medalsCount)));
           this.countriesMedalCount = medals.map((i) => i.reduce((acc: number, i: number) => acc + i, 0));

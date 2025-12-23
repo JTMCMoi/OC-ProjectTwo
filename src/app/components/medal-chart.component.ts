@@ -49,6 +49,5 @@ export class MedalChartComponent implements OnChanges {
       }
     });
     this.chart = chart;
-    console.log(`PaysChart: ${this.countries}`)
   }
 }
