@@ -1,7 +1,9 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import { CountryService } from '../services/country.service';
 import Chart from 'chart.js/auto';
+import { Country } from '../models/country';
 
 
 @Component({
@@ -12,23 +14,24 @@ import Chart from 'chart.js/auto';
 export class CountryComponent implements OnInit {
   private olympicUrl = './assets/mock/olympic.json';
   public lineChart!: Chart<"line", string[], number>;
-  public titlePage: string = '';
+  public titlePage?: string = '';
   public totalEntries: any = 0;
   public totalMedals: number = 0;
   public totalAthletes: number = 0;
   public error!: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private CountryService: CountryService) {
   }
 
   ngOnInit() {
     let countryName: string | null = null
     this.route.paramMap.subscribe((param: ParamMap) => countryName = param.get('countryName'));
-    this.http.get<any[]>(this.olympicUrl).pipe().subscribe(
+    this.CountryService.getCountries().subscribe(
       (data) => {
         if (data && data.length > 0) {
-          const selectedCountry = data.find((i: any) => i.country === countryName);
-          this.titlePage = selectedCountry.country;
+          const selectedCountry = data.find((i: Country) => i.country === countryName);
+          console.log(selectedCountry)
+          this.titlePage = selectedCountry?.country;
           const participations = selectedCountry?.participations.map((i: any) => i);
           this.totalEntries = participations?.length ?? 0;
           const years = selectedCountry?.participations.map((i: any) => i.year) ?? [];
@@ -39,8 +42,9 @@ export class CountryComponent implements OnInit {
           this.buildChart(years, medals);
         }
       },
-      (error: HttpErrorResponse) => {
+      (error) => {
         this.error = error.message
+        console.log(error.message)
       }
     );
   }

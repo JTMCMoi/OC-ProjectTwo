@@ -2,6 +2,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
+import { CountryService } from '../services/country.service';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +17,11 @@ export class HomeComponent implements OnInit {
   public error!:string
   titlePage: string = "Medals per Country";
 
-  constructor(private router: Router, private http:HttpClient) { }
+  constructor(private router: Router, private CountryService: CountryService) { }
 
   ngOnInit() {
-    this.http.get<any[]>(this.olympicUrl).pipe().subscribe(
+    this.CountryService.getCountries().subscribe(
       (data) => {
-        console.log(`Liste des données : ${JSON.stringify(data)}`);
         if (data && data.length > 0) {
           this.totalJOs = Array.from(new Set(data.map((i: any) => i.participations.map((f: any) => f.year)).flat())).length;
           const countries: string[] = data.map((i: any) => i.country);
@@ -31,9 +31,8 @@ export class HomeComponent implements OnInit {
           this.buildPieChart(countries, sumOfAllMedalsYears);
         }
       },
-      (error:HttpErrorResponse) => {
-        console.log(`erreur : ${error}`);
-        this.error = error.message
+      (error) => {
+        console.log(error.message)
       }
     )
   }
