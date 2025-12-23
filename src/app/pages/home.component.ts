@@ -2,7 +2,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
-import { CountryService } from '../services/country.service';
+import { DataService } from '../services/data.service';
 import { MedalChartComponent } from '../components/medal-chart.component';
 import { Country } from '../models/country';
 import { Participation } from '../models/participation';
@@ -20,10 +20,10 @@ export class HomeComponent implements OnInit {
   public countriesNameList!: string[];
   public countriesMedalCount!: number[];
 
-  constructor(private router: Router, private CountryService: CountryService) { }
+  constructor(private router: Router, private DataService: DataService) { }
 
   ngOnInit() {
-    this.CountryService.getCountries().subscribe(
+    this.DataService.getCountries().subscribe(
       (data) => {
         if (data && data.length > 0) {
           this.totalJOs = Array.from(new Set(data.map((i: Country) => i.participations.map((f: Participation) => f.year)).flat())).length;

@@ -1,7 +1,7 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import { CountryService } from '../services/country.service';
+import { DataService } from '../services/data.service';
 import Chart from 'chart.js/auto';
 import { Country } from '../models/country';
 
@@ -20,13 +20,13 @@ export class CountryComponent implements OnInit {
   public totalAthletes: number = 0;
   public error!: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private CountryService: CountryService) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private DataService: DataService) {
   }
 
   ngOnInit() {
     let countryName: string | null = null
     this.route.paramMap.subscribe((param: ParamMap) => countryName = param.get('countryName'));
-    this.CountryService.getCountries().subscribe(
+    this.DataService.getCountries().subscribe(
       (data) => {
         if (data && data.length > 0) {
           const selectedCountry = data.find((i: Country) => i.country === countryName);

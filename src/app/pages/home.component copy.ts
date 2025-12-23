@@ -2,7 +2,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import Chart from 'chart.js/auto';
-import { CountryService } from '../services/country.service';
+import { CountryService } from '../services/data.service';
 import { MedalChartComponent } from '../components/medal-chart.component';
 import { Country } from '../models/country';
 import { Participation } from '../models/participation';

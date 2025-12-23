@@ -6,7 +6,7 @@ import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CountryService {
+export class DataService {
   private url = './assets/mock/olympic.json';
   private countries$! : Observable<Country[]>;
 
