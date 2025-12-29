@@ -13,7 +13,6 @@ import { Participation } from '../models/participation';
   styleUrls: ['./country.component.scss']
 })
 export class CountryComponent implements OnInit {
-  private olympicUrl = './assets/mock/olympic.json';
   public lineChart!: Chart<"line", string[], number>;
   public titlePage?: string = '';
   public totalEntries: number = 0;
